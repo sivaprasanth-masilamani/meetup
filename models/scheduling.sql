@@ -2,6 +2,7 @@
   
   with scheduling_rank as (
       SELECT venue_id,
+            EXTRACT(YEAR FROM converted_time) AS Year,
             EXTRACT(MONTH FROM converted_time) AS month,
             EXTRACT(WEEK FROM converted_time) + 1 AS week_number,
             EXTRACT(DAY FROM converted_time) AS day,
