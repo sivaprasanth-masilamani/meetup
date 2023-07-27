@@ -1,0 +1,29 @@
+name: dbt Cloud CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  dbt_cloud:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger dbt Cloud job
+        run: |
+          curl -X POST "https://cloud.getdbt.com/api/v2/accounts/{account_id}/jobs/" \
+            -H "Authorization: Token $DBT_CLOUD_API_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d '{
+                  "job": {
+                    "run": {
+                      "target_name": "production",
+                      "config": {
+                        "materialized": "table"
+                      }
+                    }
+                  }
+                }'
+        env:
+          DBT_CLOUD_API_TOKEN: ${{ secrets.DBT_CLOUD_API_TOKEN }}
