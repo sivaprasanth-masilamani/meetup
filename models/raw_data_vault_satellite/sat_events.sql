@@ -1,7 +1,7 @@
 {{ config(materialized='table') }}
 
 SELECT  concat(venue_id,time) as event_id,
-        venue_id,
+        cast(venue_id as INT) as venue_id,
         time,
         DATE(TIMESTAMP_MILLIS(time)) AS converted_time,
         status,

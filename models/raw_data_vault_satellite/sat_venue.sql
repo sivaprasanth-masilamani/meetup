@@ -1,6 +1,6 @@
 {{ config(materialized='table') }}
 
-SELECT  venue_id,                   
+SELECT  cast(venue_id as int64) as venue_id,                  
         name,           
         city,                   
         country,        
