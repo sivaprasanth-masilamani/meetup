@@ -24,7 +24,7 @@
       ,week_number
       ,day_in_words
       ,time_of_event
-      ,RANK() OVER (PARTITION BY month ORDER BY total_attendance DESC) AS rank
+      ,RANK() OVER (PARTITION BY venue_id ORDER BY total_attendance DESC) AS rank
   from scheduling_rank
   order by month, rank
 
